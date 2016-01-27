@@ -1,0 +1,33 @@
+## Inhalte für neue Seite:
+Focus für den Anfang:
+* full search - soviel kram wie möglich durchsuchen können
+ * Quellen: Stadtrat, Dresden.de Emails, Amtsblatt, Parteiprogramme, Polizeimeldungen, Gerichtsenscheidungen usw (Slub mal fragen was die so haben)
+ *  Ziele: Elasticsearch, filedownload wenn möglich, Oparl, DAT
+* Notification
+
+ALLE:
+* nächsten Termine
+* über OK-Lab Dresden (Darstellung: OK-Lab als die OD Menschen)
+* OK-Lab Projekte
+* Stadtrat:
+* RSS Feed
+* Email-Notification
+* letzten kleinen Anfragen
+* letzte Sitzungen
+* letzte Suchwörter
+* Suche durch Stadtrat
+* Suche durch kleine Anfragen
+* kommenden Sitzungen
+* Pressemiteilungen der Parteien
+* Sachsen
+* Landtag
+* Autoren in der Nationalbibliothek -> VÖ der Politiker
+* Crowdsourcing
+
+Astro will:
+* Verfügbar machen mit dat
+* Eventuell nach OParl konvertieren? (API-Server + Scraper schreiben?)
+* Webapp zum browsen bauen
+  * Ansehnlich & benutzbar
+  * Sitzungsprotokolle in Vorgänge auftrennen
+  * Grundlage für späteres Crowdsourcin
