@@ -1,0 +1,118 @@
+Datenstruktur in ES
+
+Aufgabe: Es sollen alle Dokumente/Inhalte des Stadtrates erfasst und schnell duchsuch- und arrangierbar sein.
+Problem: Dokumente haben keinen Text, enthaltener Text steht nur unstrukturiert zur Verfügung oder viele Textteile mit Strukturinformationen stehen zur verfügung.
+
+Lösung: Verteilung der Dokumente und deren Teile auf verschiedene Typen (ähnlich den Tabellen bei SQL-DBs)
+
+#Sitzungen
+Enthält bekannte Sitzungsdokumente
+
+Index: ratsinfo
+DocType: sitzungen
+
+Aufbau
+{
+    "id" : "auto increment",
+    "dok_id" : "00043173",         //download_id
+    "dl_datum" : 1455297075,       //unix timestamp
+    "nr" : "FL/019/2016",          //Nummer der Sitzung (Kann auch mal: "UK/FB/SE/016/2016" sein!)
+    "gremium" : "Stadtrat",        //Name des Tagenden Gremiums
+    "wperiode" : 20092014,         //einklammernde Wahlperiode zB:2009-2014
+    "titel" : "xy Sitzung SR",     //Titel der Sitzung
+    "start" : 1455297075,
+    "ende"  : 1455297076,
+    "wortanzahl: " 2023,           //Wortanzahl
+    "dokumente" :                  //zur Sitzung gehörende Dokumente. Einladung, Beschlussempfehlung etc.
+        [{
+            "dateiname" : "00004632.pdf"
+            "titel" : "Vorlage Gremium"
+            "text"  : "lorem ipsum"       //voller Text des Dokuments
+          },
+          {..}                    //weiteres Dokument
+        ],
+    "top" :
+        [{
+            "nr" : 1                        //die feste Nummer des TOPs lt. Sitzung
+            "titel" : "Königsbrücker.."     //Titel des TOPs
+            "vorgang" : "V0852/15"          //wenn vorhanden, die Vorgangsnummer
+            "beschluss" : "Zustimmung"      //wenn vorhanden, der Bechluss
+            "abstimmung" : [15,3,7]         //wenn vorhanden Beschluss vohanden, gibts auch ein Abstimmungsergebnis (pro/conta/enthaltung)
+            "text" : "lorem ipsum"          //enthält den vollen text aus der Niederschrift (SCHWIERIG!!!!)
+            "top_doks" :                    //Dokumente die zu dem TOP gehören
+                [{
+                    "dateiname" : "00004666.pdf"
+                    "titel" : "Anlage a)"       //Titel des Dokuments
+                    "text"  : "lorem ipsum"     //voller Text des Dokuments
+                },
+                {...}                       //weiteres Dokument
+                ]
+        },
+        {...}                               //weiteres TOP
+        ]
+
+}
+
+
+#Vorlagen/Anträge
+Dokumente von denen bekannt ist das es Teile von öffentliche Vorlagen oder Anträge sind.
+
+Index: ratsinfo
+DocType: vorlagen_antraege
+
+Aufbau
+{
+    "id: " "auto increment",
+    "dok_id: " "00043173",           //download_id
+    "dl_datum" : 1455297075         //unix timestamp
+    "titel: " "V0774/15"             //Titel der Vorlage/des Antrags zu der das Dokument gehört
+    "langtitel: " "Vorlage Gremien"  //titel des Dokuments. Zb. auch "Beschluss" oä.
+    "text: " "lorem impsum.."        //volltext des Dokuments mit allen seiten
+    "wortanzahl: " 1023              //Wortanzahl
+}
+
+
+#Anfragen
+freigegebene Anfragen
+
+Index: ratsinfo
+DocType: anfragen
+
+Aufbau
+{
+    "id: " "auto increment",
+    "dok_id: " "00043173",           //download_id
+    "dl_datum" : 1455297075         //unix timestamp
+    "nr: " "mAF0084/16"              //Nummer der Anfrage
+    "wperiode" : 20092014           //einklammernde Wahlwperiodee zB:2009-2014
+    "titel: " "Königsbrücker"        //Gegenstand der Anfrage. Ähnlich einem Titel
+    "wer" : "Peter Lustig"          //Name der Antragstellenden Person
+    "partei" : "FDP/FB"             //Fragende Partei
+    "when: " 1455297075              //Datum der Befragung (meistens das Datum der stattfindenden Sitzung)
+    "anfrage"
+    {
+        "text: " "lorem impsum.."    //volltext des Dokuments mit allen seiten
+        "wortanzahl: " 1023          //Wortanzahl
+    }
+    "antwort: "
+    {
+        "text: " "lorem impsum.."    //volltext des Dokuments mit allen seiten
+        "wortanzahl: " 1023          //Wortanzahl
+    }
+}
+
+
+#Vorgänge
+Enthält bekannte Vorgänge. Ist mehr eine MetaTabelle. Da jede Vorgangsnummer schon in den betreffenden SitzungsTOPs vermerkt sind.
+
+Index: ratsinfo
+DocType: vorgaenge
+
+Aufbau
+{
+    "id" : "auto increment",
+    "name" : "V0774/15"             //Name des Vorgangs zu der das Dokument gehört
+    "art" : "Vorlage"               //Art des Vorganges
+    "Bearbeitung" :                 //Sitzungen zu denen der Vorgang bearbeitet wurde
+    ["Id/Nr","Id/Nr", ...]          //Id der Sitzung, Nummer des TOPs
+}
