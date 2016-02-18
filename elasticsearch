@@ -14,12 +14,13 @@ DocType: sitzungen
 Aufbau
 {
     "id" : "auto increment",
-    "dok_id" : "00043173",         //download_id
     "dl_datum" : 1455297075,       //unix timestamp
     "nr" : "FL/019/2016",          //Nummer der Sitzung (Kann auch mal: "UK/FB/SE/016/2016" sein!)
     "gremium" : "Stadtrat",        //Name des Tagenden Gremiums
     "wperiode" : 20092014,         //einklammernde Wahlperiode zB:2009-2014
     "titel" : "xy Sitzung SR",     //Titel der Sitzung
+    "sitzung" : "823",             // = http://ratsinfo.dresden.de/to0040.php?__ksinr=823
+    "ort" : "Rathaus Dresden"      //Sitzungsort
     "start" : 1455297075,
     "ende"  : 1455297076,
     "wortanzahl: " 2023,           //Wortanzahl
@@ -39,7 +40,7 @@ Aufbau
             "beschluss" : "Zustimmung"      //wenn vorhanden, der Bechluss
             "abstimmung" : [15,3,7]         //wenn vorhanden Beschluss vohanden, gibts auch ein Abstimmungsergebnis (pro/conta/enthaltung)
             "text" : "lorem ipsum"          //enthält den vollen text aus der Niederschrift (SCHWIERIG!!!!)
-            "top_doks" :                    //Dokumente die zu dem TOP gehören
+            "dokumente" :                    //Dokumente die zu dem TOP gehören
                 [{
                     "dateiname" : "00004666.pdf"
                     "titel" : "Anlage a)"       //Titel des Dokuments
@@ -52,7 +53,6 @@ Aufbau
         ]
 
 }
-
 
 #Vorlagen/Anträge
 Dokumente von denen bekannt ist das es Teile von öffentliche Vorlagen oder Anträge sind.
